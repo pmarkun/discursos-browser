@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<title>Discursos Browser</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script language="javascript" type="text/javascript" src="./vendor/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="./vendor/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="./vendor/ICanHaz.min.js"></script>
+    <script language="javascript" type="text/javascript" src="./js/discursos.js"></script>
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/2.0.0/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+
+    <script>
+    $(document).ready(function() {        
+        carregaTabela('partidos');
+        carregaTabela('estados');
+        carregaTabela('oradores');
+        var ultima_data = '';
+        ultima_data = carregaDiscursos(0, ultima_data);
+        });
+    </script>
+    
+    <!-- icanhaz tmpl -->
+
+    <script id="discursostmpl" type="text/html">
+        <div id="discurso-{{id}}" class="discurso {{partido}}">
+        <p><b>{{orador}} - {{partido}}:</b> {{sumario}} [<a href="{{url}}">integra</a>]</p>
+        <!-- <p><b>Tags:</b> </b><span id="{{id}}" class="addtags">{{d.tags}}</span></p> -->
+        </div>
+    </script>
+    
+    <script id="rowtmpl" type="text/html">
+        <tr>
+            <td>{{term}}</td>
+            <td>{{count}}</td>
+        </tr>
+    </script>
+    <!-- end icanhaz tmpl -->
+</head>
+
+<body>
+
+<div class="content">
+    <div id="header" class="span12">
+        <h1>Discursos Browser</h1>
+    </div>
+    <div id="filtros" class="span12 row">
+            <form action="index.html" method="get">
+                <span class="span4">
+                    <label for="partido">Partido:</label>
+                        <input id="partido" type="text" name="partido" value="" maxlength="12" />
+                    <label for="estado">Estado:</label>
+                        <input id="estado" type="text" name="estado" value="" maxlength="2" />
+                    <label for="orador">Orador:</label>
+                        <input id="orador" type="text" name="orador" value="" />
+                </span>
+                <span class="span4">
+                    <label for="texto">Texto:</label>
+                        <input id="texto" type="text" name="texto" value=""/>
+                    <label for="data_inicio">De:</label>
+                        <input id="data_inicio" type="text" name="data_inicio" value=""/>
+                    <label for="data_fim">Até:</label>
+                        <input id="data_fim" type="text" name="data_fim" value=""/>
+                </span>
+                    <input type="submit" value="Buscar" />
+            </form>
+    </div>
+    
+    <div class="span12">
+        <div id="partidos" class="span3">
+            <h2>Partidos</h2>
+            <table>
+            <!-- ICanHaz template rowtmpl -->
+            </table>
+        </div>
+        <div id="estados" class="span3">
+            <h2>Estados</h2>
+            <table>
+            <!-- ICanHaz template rowtmpl -->
+            </table>
+        </div>
+        <div id="oradores" class="span3">
+            <h2>Oradores</h2>
+            <table>
+            <!-- ICanHaz template rowtmpl -->
+            </table>
+        </div>
+    </div>
+    
+    <div id="discursos" class="span12">
+    <!-- ICanHaz template discursostmpl -->
+    </div>
+</div>
+</body>
+</html>
