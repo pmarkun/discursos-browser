@@ -40,7 +40,10 @@ my.query = {
             }
         },
     "size" : 100,
-    "from" : 0
+    "from" : 0,
+    "sort" : {
+        "data" : { "order" : "asc" }
+    }
 };
 
 //roubado do acontecenacamara
