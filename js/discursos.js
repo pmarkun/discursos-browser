@@ -217,9 +217,10 @@ function carregaDiscursos(last, ultima_data) {
 
 function carregaTabela(tabela) {
     $.each(my.dados.facets[tabela].terms, function(key, data) {
+            data.class = 'linha';
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
             });
-    $('#'+tabela+ ' table').append(ich.rowtmpl({"term" : "Total", "count" : my.dados.facets[tabela].total}));
+    $('#'+tabela+ ' table').append(ich.rowtmpl({"term" : "Total", "count" : my.dados.facets[tabela].total, 'class' : 'total'}));
 }
 
 function showTooltip(x, y, contents) {
@@ -248,7 +249,7 @@ function carregaTimeline() {
             { 
                 xaxis: { mode: "time", },
                 series: { lines: { show: true }, points: { show: false } },
-                grid: { hoverable: true, clickable: true }
+                grid: { hoverable: true, clickable: true, backgroundColor: "#E7EBD7" }
              });
      
     var previousPoint = null;
