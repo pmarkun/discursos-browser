@@ -218,7 +218,8 @@ function carregaDiscursos(last, ultima_data) {
 function carregaTabela(tabela) {
     $.each(my.dados.facets[tabela].terms, function(key, data) {
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
-            }); 
+            });
+    $('#'+tabela+ ' table').append(ich.rowtmpl({"term" : "Total", "count" : my.dados.facets[tabela].total}));
 }
 
 function showTooltip(x, y, contents) {

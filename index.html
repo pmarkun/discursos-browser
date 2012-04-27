@@ -38,7 +38,7 @@
 
 <body>
 
-<div class="content">
+<div class="container">
     <div id="header" class="span12">
         <h1>Discursos Browser</h1>
     </div>
@@ -66,20 +66,20 @@
     
     <div class="span12" id="timeline" style="height:300px;"></div>
     
-    <div class="span12">
-        <div id="partidos" class="span3">
+    <div class="span12 row-fluid">
+        <div id="partidos" class="span4">
             <h2>Partidos</h2>
             <table>
             <!-- ICanHaz template rowtmpl -->
             </table>
         </div>
-        <div id="estados" class="span3">
+        <div id="estados" class="span4">
             <h2>Estados</h2>
             <table>
             <!-- ICanHaz template rowtmpl -->
             </table>
         </div>
-        <div id="oradores" class="span3">
+        <div id="oradores" class="span4">
             <h2>Oradores</h2>
             <table>
             <!-- ICanHaz template rowtmpl -->
@@ -89,6 +89,12 @@
     
     <div id="discursos" class="span12">
     <!-- ICanHaz template discursostmpl -->
+    </div>
+    
+    <div id="footer" class="span12">
+        <span class="offset6">
+            <a href="http://thedatahub.org/dataset/brazilian-congress-speeches">dados brutos</a> - <a href="https://github.com/pmarkun/discursos-browser">code</a>
+        </span>
     </div>
 </div>
 </body>
