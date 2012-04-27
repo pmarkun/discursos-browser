@@ -78,12 +78,30 @@ function montaUrl(base, query) {
    return base + JSON.stringify(query) //Jquery tem um metodo pra isso?
 }
 
+//chupinhado do site da camara
 function integraUrl(publicacao_colecao,publicacao_pagina,publicacao_data) {
+        var col = null;
         if (publicacao_colecao == 'DCD') {
-            return 'http://imagem.camara.gov.br/dc_20.asp?selCodColecaoCsv=' + 'D&txPagina=' + publicacao_pagina + '&Datain=' + publicacao_data;
+            col = "D";
+        }
+        if (publicacao_colecao == 'DCNR') {
+            col = "R";
+        }
+        if (publicacao_colecao == 'DCN') {
+            col = "J";
+        }
+        if (publicacao_colecao == 'DANC') {
+            col = "R";
+        }
+        if (publicacao_colecao == 'ANA') {
+            col = "A";
+        }
+        
+        if (col) {
+        return 'http://imagem.camara.gov.br/dc_20.asp?selCodColecaoCsv=' + col + '&txPagina=' + publicacao_pagina + '&Datain=' + publicacao_data;
         }
         else {
-            return 'notyet';
+            return '';
         }
 }
 
@@ -181,6 +199,20 @@ function carregaTabela(tabela) {
         });
 }
 
+function showTooltip(x, y, contents) {
+    $('<div id="tooltip">' + contents + '</div>').css( {
+        position: 'absolute',
+        display: 'none',
+        top: y + 5,
+        left: x + 5,
+        border: '1px solid #D5EFFF',
+        padding: '2px',
+        'background-color': '#E1F3FA',
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
+
+}
+
 function carregaTimeline() {
     $.getJSON(url, function(data) {
         var d = [];
@@ -195,5 +227,36 @@ function carregaTimeline() {
                 series: { lines: { show: true }, points: { show: false } },
                 grid: { hoverable: true, clickable: true }
              });
+     
+    var previousPoint = null;
+    $("#timeline").bind("plothover", function (event, pos, item) {
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+                $("#tooltip").remove();
+                showTooltip(item.pageX, item.pageY, new Date(item.datapoint[0]).toDateString() + '\n' + item.datapoint[1] + ' discursos');
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;
+            }
+    });
+
+    $("#timeline").bind("plotclick", function (event, pos, item) {
+        if (item) {
+            var d = new Date(item.datapoint[0]);
+            var curr_date = d.getDate()+'';
+            if (curr_date < 9) { curr_date = '0' + curr_date; }
+            var curr_month = d.getMonth()+1; //month contado a partir do 0
+            if (curr_month < 9) { curr_month = '0' + curr_month; }
+            var curr_year = d.getFullYear();
+            var item_date = curr_date + "-" + curr_month + "-" + curr_year;
+            $('html, body').animate({
+                            scrollTop: $("#" + item_date).offset().top
+                        }, 500);
+        }
+    });
+     
      });
 }
