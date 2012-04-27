@@ -1,6 +1,7 @@
-var base_url = "http://localhost:9200/esfera/discursos/_search?source=";
+my = {};
+my.base_url = "http://localhost:9200/esfera/discursos/_search?source=";
 
-var query = {
+my.query = {
     "query" : {
             "filtered" : {
                 "query" : {
@@ -74,8 +75,8 @@ function normalizeFilters(filters) {
 }
 
 
-function montaUrl(base, query) {
-   return base + JSON.stringify(query) //Jquery tem um metodo pra isso?
+function montaUrl(url, q) {
+   return url + JSON.stringify(q) //Jquery tem um metodo pra isso?
 }
 
 //chupinhado do site da camara
@@ -106,7 +107,7 @@ function integraUrl(publicacao_colecao,publicacao_pagina,publicacao_data) {
 }
 
 //temporario - modificar
-function carregaFiltros(query) {
+function carregaFiltros(q) {
     var filters = []
     
     if (gup("estado")) {
@@ -149,25 +150,46 @@ function carregaFiltros(query) {
     }
     
     if (filters.length >= 1) {
-        query.query.filtered.filter = normalizeFilters(filters);
+        q.query.filtered.filter = normalizeFilters(filters);
     }
     
     if (gup("texto")) {
-        query.query.filtered.query = {
+        q.query.filtered.query = {
             "text" : {
                 "sumario" : gup("texto")
             }
         }
         $("input#texto").val(gup("texto"));
     }
-    return query
+    return q
+}
+
+
+function carregaDados(q) {
+    url = montaUrl(my.base_url, q);
+    $.getJSON(url, function(data) {
+        rockndroll(data);
+    });
+    return 'ok'
+}
+
+function rockndroll(data) {
+        my.dados = data;
+        carregaTabela('partidos');
+        carregaTabela('estados');
+        carregaTabela('oradores');
+        carregaTimeline();
+        $("#data_inicio").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#data_fim").datepicker({ dateFormat: "dd/mm/yy" });
+        var ultima_data = '';
+        ultima_data = carregaDiscursos(0, ultima_data, my.query);
 }
 
 function carregaDiscursos(last, ultima_data) {
-    if (query.from != 0) {
-        query.from = last+query.size;
+    if (last != 0) {
+        my.query.from = last+my.query.size;
     }
-    url = montaUrl(base_url, query);
+    url = montaUrl(my.base_url, my.query);
     $.getJSON(url, function(discursos_data) {
     $.each(discursos_data.hits.hits, function(key, data) {
             if (ultima_data != data._source.data) {
@@ -191,12 +213,9 @@ function carregaDiscursos(last, ultima_data) {
 }
 
 function carregaTabela(tabela) {
-    url = montaUrl(base_url, query);
-    $.getJSON(url, function(discursos_data) {
-    $.each(discursos_data.facets[tabela].terms, function(key, data) {
+    $.each(my.dados.facets[tabela].terms, function(key, data) {
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
             }); 
-        });
 }
 
 function showTooltip(x, y, contents) {
@@ -214,7 +233,7 @@ function showTooltip(x, y, contents) {
 }
 
 function carregaTimeline() {
-    $.getJSON(url, function(data) {
+        var data = my.dados;
         var d = [];
         
         $.each(data.facets.data.terms, function(key, data) {
@@ -258,5 +277,4 @@ function carregaTimeline() {
         }
     });
      
-     });
 }

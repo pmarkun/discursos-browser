@@ -13,15 +13,8 @@
 
     <script>
     $(document).ready(function() {
-        query = carregaFiltros(query);
-        carregaTabela('partidos');
-        carregaTabela('estados');
-        carregaTabela('oradores');
-        carregaTimeline();
-        $("#data_inicio").datepicker({ dateFormat: "dd/mm/yy" });
-        $("#data_fim").datepicker({ dateFormat: "dd/mm/yy" });
-        var ultima_data = '';
-        ultima_data = carregaDiscursos(0, ultima_data);
+        my.query = carregaFiltros(my.query);
+        carregaDados(my.query);
         });
     </script>
     
