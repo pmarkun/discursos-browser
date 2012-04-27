@@ -42,16 +42,7 @@ def upload(client, fp, encoding=None, delimiter=','):
         print "Creating new database"
 
     print "Inserting rows"
-    rows = []
-    steps = 5000
-    i = 0
-    for row in funkystuff(reader):
-        rows.append(row)
-        if i > steps:
-            client.upsert(rows)
-            print "Inserting " + str(steps) + " results"
-            i = 0
-        i = i + 1
-    return 'ok'
+    client.upsert(funkystuff(reader))
+    
 
 upload(client, "data/discursos.csv");
