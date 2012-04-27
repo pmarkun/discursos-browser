@@ -29,6 +29,13 @@ var query = {
                 "field" : "orador",
                 "size" : 30
                 }
+            },
+        "data" : {
+            "terms" : {
+                "field" : "data",
+                "size" : 5000,
+                "order" : "term"
+                }
             }
         },
     "size" : 100,
@@ -44,7 +51,8 @@ function gup( name ) {
   if( results == null )
     return "";
   else
-    return results[1].substring(0,results[1].length);
+    var result = results[1].substring(0,results[1].length);
+    return decodeURIComponent(result).replace(/\+/g, " ")
 }
 
 //roubado e adaptado do recline
@@ -93,6 +101,11 @@ function carregaFiltros(query) {
         $("input#partido").val(gup("partido"));
     }
     
+    if (gup("orador")) {
+        filters.push({ term : { "orador" : gup("orador") }});
+        $("input#orador").val(gup("orador"));
+    }
+    
     if (gup("data_inicio")) {
         var data_inicio_filter = {
             "range" : {
@@ -102,7 +115,7 @@ function carregaFiltros(query) {
                     }
                 }
         filters.push(data_inicio_filter);
-        $("input#data_inicio").val(gup("data_inicio"));
+        $("input#data_inicio").val(gup("data_inicio").replace(/%2F/g,"/"));
     }
     
     if (gup("data_fim")) {
@@ -114,10 +127,20 @@ function carregaFiltros(query) {
                     }
                 }
         filters.push(data_fim_filter);
-        $("input#data_fim").val(gup("data_fim"));
+        $("input#data_fim").val(gup("data_fim").replace(/%2F/g,"/"));
     }
+    
     if (filters.length >= 1) {
         query.query.filtered.filter = normalizeFilters(filters);
+    }
+    
+    if (gup("texto")) {
+        query.query.filtered.query = {
+            "text" : {
+                "sumario" : gup("texto")
+            }
+        }
+        $("input#texto").val(gup("texto"));
     }
     return query
 }
@@ -156,4 +179,21 @@ function carregaTabela(tabela) {
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
             }); 
         });
+}
+
+function carregaTimeline() {
+    $.getJSON(url, function(data) {
+        var d = [];
+        
+        $.each(data.facets.data.terms, function(key, data) {
+        d.push([data.term, data.count]);
+        });
+        
+        $.plot($("#timeline"), [d], 
+            { 
+                xaxis: { mode: "time", },
+                series: { lines: { show: true }, points: { show: false } },
+                grid: { hoverable: true, clickable: true }
+             });
+     });
 }

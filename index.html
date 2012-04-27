@@ -15,6 +15,7 @@
         carregaTabela('partidos');
         carregaTabela('estados');
         carregaTabela('oradores');
+        carregaTimeline();
         var ultima_data = '';
         ultima_data = carregaDiscursos(0, ultima_data);
         });
@@ -65,6 +66,8 @@
                     <input type="submit" value="Buscar" />
             </form>
     </div>
+    
+    <div class="span12" id="timeline" style="height:300px;"></div>
     
     <div class="span12">
         <div id="partidos" class="span3">
