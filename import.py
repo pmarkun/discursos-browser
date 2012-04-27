@@ -31,7 +31,9 @@ def upload(client, fp, encoding=None, delimiter=','):
              "partido" :
                 { "type" : "string", "index" : "not_analyzed" },
             "estado" :
-                { "type" : "string", "index" : "not_analyzed" }
+                { "type" : "string", "index" : "not_analyzed" },
+            "data" :
+                { "type" : "date", "format" : "dd/MM/YYYY" }
             } 
         })
         print 'Mapping done'

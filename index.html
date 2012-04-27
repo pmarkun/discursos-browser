@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
 
     <script>
-    $(document).ready(function() {        
+    $(document).ready(function() {
+        query = carregaFiltros(query);
         carregaTabela('partidos');
         carregaTabela('estados');
         carregaTabela('oradores');
