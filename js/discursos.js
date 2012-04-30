@@ -1,5 +1,5 @@
 my = {};
-my.base_url = "http://localhost:9200/esfera/discursos/_search?source=";
+my.base_url = "http://localhost:9200/esfera/discursos";
 
 my.query = {
     "query" : {
@@ -79,7 +79,7 @@ function normalizeFilters(filters) {
 
 
 function montaUrl(url, q) {
-   return url + JSON.stringify(q) //Jquery tem um metodo pra isso?
+   return url + '/_search?source=' + JSON.stringify(q) //Jquery tem um metodo pra isso?
 }
 
 //chupinhado do site da camara
@@ -168,15 +168,15 @@ function carregaFiltros(q) {
 }
 
 
-function carregaDados(q) {
+function rockndroll(q) {
     url = montaUrl(my.base_url, q);
     $.getJSON(url, function(data) {
-        rockndroll(data);
+        carregaDados(data);
     });
     return 'ok'
 }
 
-function rockndroll(data) {
+function carregaDados(data) {
         my.dados = data;
         carregaTabela('partidos');
         carregaTabela('estados');
@@ -282,4 +282,13 @@ function carregaTimeline() {
         }
     });
      
+}
+
+
+function insertTags(tags, id) {
+    //authenticate?
+    //load object through id
+    //add tags
+    //upload back to elasticsearch
+    //reload object on page?
 }
