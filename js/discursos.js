@@ -1,6 +1,6 @@
 my = {};
 my.base_url = "http://localhost:9200/esfera/discursos";
-
+my.base_tagger = "http://localhost:5000/insert/tmp/tmp"
 my.query = {
     "query" : {
             "filtered" : {
@@ -201,6 +201,9 @@ function carregaDiscursos(last, ultima_data) {
             }
             
             data._source['url'] = integraUrl(data._source.publicacao_colecao, data._source.publicacao_pagina,data._source.publicacao_data);
+            data._source['id'] = data._id;
+            data._source.tags = 'adicione uma tag';
+    
             $('#discursos').append(ich.discursostmpl(data._source));
         });
     var last = $(".discurso").size()
@@ -288,7 +291,21 @@ function carregaTimeline() {
 function insertTags(tags, id) {
     //authenticate?
     //load object through id
+    var url = my.base_url + "/" + id
+    $.getJSON(url, function(discurso) {
     //add tags
+    discurso._source.tags = tags;
+    discurso._source.id = id;
     //upload back to elasticsearch
+    $.ajax({
+        "url" : my.base_tagger,
+        "data" : {
+            "q" : JSON.stringify(discurso._source)
+            }
+        }).done(function (data) {
+            //not working? http header?
+            console.log("hooray!");
+            });
+    });
     //reload object on page?
 }
