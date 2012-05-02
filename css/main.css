@@ -123,3 +123,7 @@ td.count {
     width: 100%;
 }
 
+.tagging_form input {
+    width: 240px;
+    height: 24px;
+    }

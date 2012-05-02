@@ -5,6 +5,7 @@
     <script language="javascript" type="text/javascript" src="./vendor/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="./vendor/jquery-ui/jquery-ui-1.8.19.custom.min.js"></script>
     <script language="javascript" type="text/javascript" src="./vendor/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="./vendor/jquery.jeditable.js"></script>
     <script language="javascript" type="text/javascript" src="./vendor/ICanHaz.min.js"></script>
     <script language="javascript" type="text/javascript" src="./js/discursos.js"></script>
     <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/2.0.0/bootstrap.css" />
@@ -14,16 +15,16 @@
     <script>
     $(document).ready(function() {
         my.query = carregaFiltros(my.query);
-        carregaDados(my.query);
+        rockndroll(my.query);
         });
     </script>
     
     <!-- icanhaz tmpl -->
 
     <script id="discursostmpl" type="text/html">
-        <div id="discurso-{{id}}" class="discurso {{partido}}">
+        <div id="{{id}}" class="discurso {{partido}}">
         <p><b>{{orador}} - {{partido}}:</b> {{sumario}} [<a href="{{url}}">integra</a>]</p>
-        <!-- <p><b>Tags:</b> </b><span id="{{id}}" class="addtags">{{d.tags}}</span></p> -->
+        <p><span id="{{id}}" class="tagging">{{tags}}</span></p>
         </div>
     </script>
     

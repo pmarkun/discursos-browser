@@ -1,6 +1,6 @@
 my = {};
-my.base_url = "http://localhost:9200/esfera/discursos/_search?source=";
-
+my.base_url = "http://localhost:9200/esfera/discursos";
+my.base_tagger = "http://localhost:5000/insert/tmp/tmp"
 my.query = {
     "query" : {
             "filtered" : {
@@ -79,7 +79,7 @@ function normalizeFilters(filters) {
 
 
 function montaUrl(url, q) {
-   return url + JSON.stringify(q) //Jquery tem um metodo pra isso?
+   return url + '/_search?source=' + JSON.stringify(q) //Jquery tem um metodo pra isso?
 }
 
 //chupinhado do site da camara
@@ -168,15 +168,15 @@ function carregaFiltros(q) {
 }
 
 
-function carregaDados(q) {
+function rockndroll(q) {
     url = montaUrl(my.base_url, q);
     $.getJSON(url, function(data) {
-        rockndroll(data);
+        carregaDados(data);
     });
     return 'ok'
 }
 
-function rockndroll(data) {
+function carregaDados(data) {
         my.dados = data;
         carregaTabela('partidos');
         carregaTabela('estados');
@@ -201,7 +201,28 @@ function carregaDiscursos(last, ultima_data) {
             }
             
             data._source['url'] = integraUrl(data._source.publicacao_colecao, data._source.publicacao_pagina,data._source.publicacao_data);
+            data._source['id'] = data._id;
+            if (typeof data._source.tags == 'undefined') {
+                data._source.tags = 'adicione uma tag';
+                var edit_tags = '';
+            }
+            else {
+                data._source.tags = data._source.tags.join(",");
+                var edit_tags = data._source.tags;
+            }
+    
             $('#discursos').append(ich.discursostmpl(data._source));
+            $(".tagging").editable(function (value, settings) {
+                var tags = insertTags(value, this.id);
+                return value;
+            }, {
+                "data" : edit_tags,
+                "tooltip" : "Adicione uma tag",
+                "cssclass" : "tagging_form",
+                "width" : 240,
+                "height" : 24
+                
+                });
         });
     var last = $(".discurso").size()
     if (last < discursos_data.hits.total) {
@@ -282,4 +303,35 @@ function carregaTimeline() {
         }
     });
      
+}
+
+
+function removeSpaces(lista) {
+    clean_list = []
+    $.each(lista, function (key, data) {
+        clean_list.push(data.trim());
+
+    });
+    return clean_list;
+}
+function insertTags(tags, id) {
+    //authenticate?
+    //load object through id
+    var url = my.base_url + "/" + id
+    $.getJSON(url, function(discurso) {
+    //add tags
+    discurso._source.tags = removeSpaces(tags.split(","));
+    discurso._source.id = id;
+    //upload back to elasticsearch
+    $.ajax({
+        "url" : my.base_tagger,
+        "data" : {
+            "q" : JSON.stringify(discurso._source)
+            }
+        }).done(function (data) {
+            //not working? http header?
+            return discurso._source.tags;
+            });
+    });
+    //reload object on page?
 }
