@@ -202,9 +202,27 @@ function carregaDiscursos(last, ultima_data) {
             
             data._source['url'] = integraUrl(data._source.publicacao_colecao, data._source.publicacao_pagina,data._source.publicacao_data);
             data._source['id'] = data._id;
-            data._source.tags = 'adicione uma tag';
+            if (typeof data._source.tags == 'undefined') {
+                data._source.tags = 'adicione uma tag';
+                var edit_tags = '';
+            }
+            else {
+                data._source.tags = data._source.tags.join(",");
+                var edit_tags = data._source.tags;
+            }
     
             $('#discursos').append(ich.discursostmpl(data._source));
+            $(".tagging").editable(function (value, settings) {
+                var tags = insertTags(value, this.id);
+                return value;
+            }, {
+                "data" : edit_tags,
+                "tooltip" : "Adicione uma tag",
+                "cssclass" : "tagging_form",
+                "width" : 240,
+                "height" : 24
+                
+                });
         });
     var last = $(".discurso").size()
     if (last < discursos_data.hits.total) {
@@ -288,13 +306,21 @@ function carregaTimeline() {
 }
 
 
+function removeSpaces(lista) {
+    clean_list = []
+    $.each(lista, function (key, data) {
+        clean_list.push(data.trim());
+
+    });
+    return clean_list;
+}
 function insertTags(tags, id) {
     //authenticate?
     //load object through id
     var url = my.base_url + "/" + id
     $.getJSON(url, function(discurso) {
     //add tags
-    discurso._source.tags = tags;
+    discurso._source.tags = removeSpaces(tags.split(","));
     discurso._source.id = id;
     //upload back to elasticsearch
     $.ajax({
@@ -304,7 +330,7 @@ function insertTags(tags, id) {
             }
         }).done(function (data) {
             //not working? http header?
-            console.log("hooray!");
+            return discurso._source.tags;
             });
     });
     //reload object on page?

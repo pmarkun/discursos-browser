@@ -37,3 +37,9 @@ h2 {
     margin-bottom:30px;
     font-family: Comfortaa, Helvetica;
     }
+
+.tagging_form input {
+    width: 240px;
+    height: 24px;
+    }
+    
