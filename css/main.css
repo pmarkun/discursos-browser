@@ -1,39 +1,125 @@
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-@import url(http://fonts.googleapis.com/css?family=Comfortaa);
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Comfortaa:300);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:600,300,400italic);
 
 body {
-    background-color: #FFFCE6;
     font-family: Open Sans, Helvetica;
     }
 
+#header {
+    margin: 80 0 50 -200;
+}
+
+#header h1 {
+    position: relative;
+    width: 920px;
+    border-bottom: 1px #CBCAC4 solid ;
+    padding-bottom: 5px;
+    margin: 0 0 0 219px;
+    font-family: Comfortaa, Helvetica;
+    font-size: 30px;
+    font-weight: 300px;
+    color: #475268;
+    letter-spacing: -2px;
+    word-spacing: 8px;
+    }
+    
+#header img{
+    position: absolute;
+    float: left;
+}
+
+#filtros {
+    margin: 0 0 30px 0;
+    
+}
+
+#colunas {
+    margin-top: 30px;
+}
+
+#colunas h2 {
+    float: left;
+    font-family:Yanone Kaffeesatz, Helvetica;
+    font-weight: 300;
+    font-size:23px;
+    color: #5D5C55;
+    }
+    
+#colunas h3 {
+    float: right;
+    font-family:Yanone Kaffeesatz, Helvetica;
+    font-size:15px;
+    margin-top: 5px;
+    margin-right:40px;
+    color: #5D5C55;
+    font-weight: 300;
+}
 
 table {
     background-color: #E7EBD7;
-    width:100%;
-    }
+    width:80%;
+    float: right;
+}
 
 td.term {
     width:80%;
+    border: 1px solid #FFF;
     }
 
 td.count {
     width:20%;
+    border: 1px solid #FFF;
     }
 
-h2 {
-    font-family:Yanone Kaffeesatz, Helvetica;
-    font-size:23px;
-    color: #5D5C55;
-    }
-
-.total {
+.total{
     font-family:Yanone Kaffeesatz, Helvetica;
     font-size:23px;
 }
 
-#header h1 {
-    margin-top:30px;
-    margin-bottom:30px;
-    font-family: Comfortaa, Helvetica;
-    }
+#discursos {
+    margin-top: 30px;
+    background-color: #E7EBD7;
+    margin-bottom: 30px;
+}
+
+#discursos h2 {
+    width:100%;
+    font-family:Yanone Kaffeesatz, Helvetica;
+    font-weight: 300;
+    font-size:23px;
+    background-color:#fff;
+    color: #5D5C55;
+}
+
+#discursos p {
+    width:100%;
+    font-family: "Open Sans", sans-serif;
+    font-size:16px;
+    font-weight:300px;
+    color: #5D5C55;
+}
+
+#discursos b{
+    font-weight: 600;
+}
+
+#discursos .date {
+    font-size:16px;
+    border-top: 5px solid #fff;
+    padding: 3px;
+    color: #5D5C55;
+    background-color:#fff;
+}
+
+.discurso {
+    font-weight:200;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 3px;
+}
+
+.btn {
+    width: 100%;
+}
+

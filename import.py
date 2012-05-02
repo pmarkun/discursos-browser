@@ -2,7 +2,7 @@ import datastore.client
 import csv, os
 
 #Define elasticsearch database
-url = "http://localhost:9200/esfera/discursos/"
+url = "http://127.0.0.1:9200/esfera/discursos/"
 client = datastore.client.DataStoreClient(url)
 
 

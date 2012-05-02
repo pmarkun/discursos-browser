@@ -209,7 +209,7 @@ function carregaDiscursos(last, ultima_data) {
                 $('#loadmore').remove()
             }
             ultima_data = '"'+ultima_data+'"';
-            $('#discursos').append("<button id='loadmore' class='btn' onClick='carregaDiscursos("+last+", "+ultima_data+")'>load more</button>");
+            $('#discursos').append("<button id='loadmore' class='btn' onClick='carregaDiscursos("+last+", "+ultima_data+")'>Mais resultados...</button>");
         }
     });
     return ultima_data;
