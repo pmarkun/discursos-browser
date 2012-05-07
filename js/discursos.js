@@ -203,7 +203,7 @@ function carregaDiscursos(last, ultima_data) {
             data._source['url'] = integraUrl(data._source.publicacao_colecao, data._source.publicacao_pagina,data._source.publicacao_data);
             data._source['id'] = data._id;
             if (typeof data._source.tags == 'undefined') {
-                data._source.tags = 'adicione uma tag';
+                data._source.tags = 'Adicione uma tag';
                 var edit_tags = '';
             }
             else {

@@ -45,7 +45,12 @@ body {
     font-size:20px;
     color: #5D5C55;
     height:32px;
+    position: relative;
     }
+    
+.imgtable {
+    position: absolute;
+}
     
 #colunas h3 {
     float: right;
@@ -66,6 +71,23 @@ table {
     font-family:OpenSans, Helvetica;
     font-size: 14px;
     font-weight: 300;
+}
+
+#partidos table {
+    border-top: solid 5px #E21C00;
+}
+
+#estados table {
+    border-top: solid 5px #CE4B97;
+}
+
+#oradores table {
+    border-top: solid 5px #ABC7B0;
+}
+
+
+td.term {
+    width: 80%;
 }
 
 #partidos .term a{
@@ -112,22 +134,22 @@ table {
 }
 
 td.count {
-    width:60%;
+    width:20%;
     background-color: #E7EBD7;
-    float: left;
-    font-style: italic;
+    border-left: 1px solid #fff;
     }
 
+/*problema aqui*/
 .total{
     font-family:Yanone Kaffeesatz, Helvetica;
     font-size:23px;
+    color: #DF3E21;
+    font-weight: 400;
+    border-top: 1px solid #FFF;
 }
 
-.total td.count {
-    width:100%;
-    float: right;
-    color: #DF3E21;
-    text-align: right;
+.total .count {
+    border-left: 1px solid #FFF;
 }
 
 #discursos {
@@ -174,14 +196,8 @@ td.count {
 
 .tagging {
     cursor: pointer;
-    display: block;
-    background-color:#AEAFA6;
-    width:100;
-    padding: 1px;
-    border: solid #AEAFA6 2px;
-    border-radius: 3px;
-    text-align: center;
     font-size: 12px;
+    font-style: underline;
 }
 
 .btn {
