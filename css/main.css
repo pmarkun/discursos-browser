@@ -1,13 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700);
 @import url(http://fonts.googleapis.com/css?family=Comfortaa:300);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,300,400italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,400italic);
 
 body {
     font-family: Open Sans, Helvetica;
     }
 
 #header {
-    margin: 80 0 50 -200;
+    margin: 50 0 50 -200;
 }
 
 #header h1 {
@@ -30,8 +30,8 @@ body {
 }
 
 #filtros {
-    margin: 0 0 30px 0;
-    
+    width: 940px;
+    margin: 0 auto 30px;
 }
 
 #colunas {
@@ -41,9 +41,10 @@ body {
 #colunas h2 {
     float: left;
     font-family:Yanone Kaffeesatz, Helvetica;
-    font-weight: 300;
-    font-size:23px;
+    font-weight: 400;
+    font-size:20px;
     color: #5D5C55;
+    height:32px;
     }
     
 #colunas h3 {
@@ -51,30 +52,82 @@ body {
     font-family:Yanone Kaffeesatz, Helvetica;
     font-size:15px;
     margin-top: 5px;
-    margin-right:40px;
+    margin-right:10px;
     color: #5D5C55;
     font-weight: 300;
 }
 
 table {
-    background-color: #E7EBD7;
-    width:80%;
+    width:240px;
     float: right;
+    position: relative;
+    z-index: -10;
+    background-color: #E7EBD7;
+    font-family:OpenSans, Helvetica;
+    font-size: 14px;
+    font-weight: 300;
 }
 
-td.term {
-    width:80%;
-    border: 1px solid #FFF;
-    }
+#partidos .term a{
+    color: #333;
+}
+
+#estados .term a{
+    color: #41160F;
+}
+
+#oradores .term a {
+    color: #393939;
+}
+    
+.term a{
+    z-index:9999;
+}
+    
+.holder {
+    position: relative;
+    width:100%;
+    display: block;
+}
+    
+.percent {
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#partidos .percent {
+    background: #E21C00;
+}
+
+#estados .percent {
+    background: #CE4B97;
+}
+
+#oradores .percent {
+    background: #ABC7B0;
+}
 
 td.count {
-    width:20%;
-    border: 1px solid #FFF;
+    width:60%;
+    background-color: #E7EBD7;
+    float: left;
+    font-style: italic;
     }
 
 .total{
     font-family:Yanone Kaffeesatz, Helvetica;
     font-size:23px;
+}
+
+.total td.count {
+    width:100%;
+    float: right;
+    color: #DF3E21;
+    text-align: right;
 }
 
 #discursos {
@@ -117,6 +170,18 @@ td.count {
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
     padding: 3px;
+}
+
+.tagging {
+    cursor: pointer;
+    display: block;
+    background-color:#AEAFA6;
+    width:100;
+    padding: 1px;
+    border: solid #AEAFA6 2px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 12px;
 }
 
 .btn {

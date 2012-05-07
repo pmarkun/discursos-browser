@@ -220,8 +220,8 @@ function carregaDiscursos(last, ultima_data) {
                 "tooltip" : "Adicione uma tag",
                 "cssclass" : "tagging_form",
                 "width" : 240,
-                "height" : 24
-                
+                "height" : 24,
+               
                 });
         });
     var last = $(".discurso").size()
@@ -239,6 +239,8 @@ function carregaDiscursos(last, ultima_data) {
 function carregaTabela(tabela) {
     $.each(my.dados.facets[tabela].terms, function(key, data) {
             data.class = 'linha';
+            data.percent = (data.count/my.dados.facets[tabela].total)*100;
+            data.percent = data.percent.toPrecision(3);
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
             });
     $('#'+tabela+ ' table').append(ich.rowtmpl({"term" : "Total", "count" : my.dados.facets[tabela].total, 'class' : 'total'}));

@@ -30,7 +30,12 @@
     
     <script id="rowtmpl" type="text/html">
         <tr class="{{class}}">
-            <td class="term">{{term}}</td>
+            <td class="term">
+                <span class="holder">
+                    <a href="#">{{term}}</a>
+                    <span class="percent" style="width:{{percent}}%"></span>
+                </span>
+            </td>
             <td class="count">{{count}}</td>
         </tr>
     </script>
@@ -61,7 +66,9 @@
                     <label for="data_fim">Até:</label>
                         <input id="data_fim" type="text" name="data_fim" value=""/>
                 </span>
+                <span id="buscar">
                     <input type="submit" value="Buscar" />
+                </span>
             </form>
     </div>
     
