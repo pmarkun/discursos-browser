@@ -139,13 +139,16 @@ td.count {
     border-left: 1px solid #fff;
     }
 
-/*problema aqui*/
 .total{
     font-family:Yanone Kaffeesatz, Helvetica;
     font-size:23px;
     color: #DF3E21;
     font-weight: 400;
     border-top: 1px solid #FFF;
+}
+
+#partidos .total a, #estados .total a, #oradores .total a {
+    color: #DF3E21;
 }
 
 .total .count {
@@ -173,6 +176,8 @@ td.count {
     font-size:16px;
     font-weight:300px;
     color: #5D5C55;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #discursos b{

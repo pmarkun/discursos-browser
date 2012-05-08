@@ -271,8 +271,14 @@ function carregaTimeline() {
         $.plot($("#timeline"), [d], 
             { 
                 xaxis: { mode: "time", },
-                series: { lines: { show: true }, points: { show: false } },
-                grid: { hoverable: true, clickable: true, backgroundColor: "#E7EBD7" }
+                series: { 
+                    lines: { show: true,
+                             color: "#ff0000"
+                             },
+                    points: { show: false }
+                    },
+                colors : ["#DF3E21"],
+                grid: { hoverable: true, clickable: true, backgroundColor: "#E7EBD7", borderWidth : 0 }
              });
      
     var previousPoint = null;
