@@ -1,6 +1,6 @@
 my = {};
 my.base_url = "http://localhost:9200/esfera/discursos";
-my.base_tagger = "http://localhost:5000/insert/tmp/tmp"
+my.base_tagger = "http://localhost:5000/insert/esfera/discursos"
 my.query = {
     "query" : {
             "filtered" : {
@@ -335,6 +335,7 @@ function insertTags(tags, id) {
     //upload back to elasticsearch
     $.ajax({
         "url" : my.base_tagger,
+        "dataType" : "jsonp",
         "data" : {
             "q" : JSON.stringify(discurso._source)
             }
