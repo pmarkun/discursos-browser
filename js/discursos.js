@@ -190,7 +190,7 @@ function carregaDados(data) {
 
 function carregaDiscursos(last, ultima_data) {
     if (last != 0) {
-        my.query.from = last+my.query.size;
+        my.query.from += my.query.size;
     }
     url = montaUrl(my.base_url, my.query);
     $.getJSON(url, function(discursos_data) {
