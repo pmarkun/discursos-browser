@@ -34,6 +34,22 @@ body {
     margin: 0 auto 30px;
 }
 
+#filtros form label {
+    font-family: Yanone Kaffeesatz, Helvetica;
+    font-size: 23px;
+    font-weight: 300;
+}
+
+#filtros form input {
+    height: 30px;
+    font-family: Open Sans, Helvetica;
+    font-size: 16px;
+}
+
+#buscar input {
+    margin-top: 149px;
+}
+
 #colunas {
     margin-top: 30px;
 }
@@ -42,15 +58,10 @@ body {
     float: left;
     font-family:Yanone Kaffeesatz, Helvetica;
     font-weight: 400;
-    font-size:20px;
+    font-size:23px;
     color: #5D5C55;
     height:32px;
-    position: relative;
     }
-    
-.imgtable {
-    position: absolute;
-}
     
 #colunas h3 {
     float: right;
@@ -60,11 +71,12 @@ body {
     margin-right:10px;
     color: #5D5C55;
     font-weight: 300;
+    
 }
 
 table {
-    width:240px;
     float: right;
+    width: 100%;
     position: relative;
     z-index: -10;
     background-color: #E7EBD7;
@@ -73,18 +85,21 @@ table {
     font-weight: 300;
 }
 
-#partidos table {
+#partidos table .linha-0 td.term {
     border-top: solid 5px #E21C00;
 }
 
-#estados table {
+#estados table .linha-0 td.term {
     border-top: solid 5px #CE4B97;
 }
 
-#oradores table {
+#oradores table .linha-0 td.term {
     border-top: solid 5px #ABC7B0;
 }
 
+table .linha-0 td.count {
+    border-top: solid 5px #FFFFFF;
+}
 
 td.term {
     width: 80%;

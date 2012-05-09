@@ -237,11 +237,13 @@ function carregaDiscursos(last, ultima_data) {
 }
 
 function carregaTabela(tabela) {
+    var count = 0;
     $.each(my.dados.facets[tabela].terms, function(key, data) {
-            data.class = 'linha';
+            data.class = 'linha-'+count;
             data.percent = (data.count/my.dados.facets[tabela].total)*100;
             data.percent = data.percent.toPrecision(3);
             $('#'+tabela+ ' table').append(ich.rowtmpl(data));
+            count = count + 1;
             });
     $('#'+tabela+ ' table').append(ich.rowtmpl({"term" : "Total", "count" : my.dados.facets[tabela].total, 'class' : 'total'}));
 }
