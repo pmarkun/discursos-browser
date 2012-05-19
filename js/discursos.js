@@ -158,7 +158,7 @@ function carregaFiltros(q) {
     
     if (gup("texto")) {
         q.query.filtered.query = {
-            "text" : {
+            "text_phrase" : {
                 "sumario" : gup("texto")
             }
         }
