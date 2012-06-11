@@ -1,6 +1,6 @@
 my = {};
-my.base_url = "http://localhost:9200/esfera/discursos";
-my.base_tagger = "http://localhost:5000/insert/esfera/discursos"
+my.base_url = SETTINGS['base_url'];
+my.base_tagger = SETTINGS['base_tagger'];
 my.query = {
     "query" : {
             "filtered" : {
@@ -120,6 +120,11 @@ function carregaFiltros(q) {
     
     if (gup("partido")) {
         filters.push({ term : { "partido" : gup("partido") }});
+        $("input#partido").val(gup("partido"));
+    }
+    
+    if (gup("tags")) {
+        filters.push({ term : { "tags" : gup("tags") }});
         $("input#partido").val(gup("partido"));
     }
     

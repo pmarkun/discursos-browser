@@ -1,0 +1,4 @@
+SETTINGS = {};
+
+SETTINGS['base_url'] = 'putyourelasticsearchserverhere';
+SETTINGS['base_tagger'] = 'putyourquickflaskserverhere';
