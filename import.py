@@ -2,7 +2,8 @@ import datastore.client
 import csv, os
 
 #Define elasticsearch database
-url = "http://127.0.0.1:9200/esfera/discursos/"
+#url = "http://127.0.0.1:9200/esfera/discursos/"
+url = "http://66.228.59.236:9200/revanche/brado/"
 client = datastore.client.DataStoreClient(url)
 
 
@@ -20,29 +21,30 @@ def upload(client, fp, encoding=None, delimiter=','):
         fo = open(fp)
     reader = csv.DictReader(fo, delimiter=delimiter)
     
-    try:
-        client.delete()
-        print "Delete done"
-        
-        client.mapping_update(
-        { "properties" :
-            { "orador" : 
-                { "type" : "string", "index" : "not_analyzed" },
-             "partido" :
-                { "type" : "string", "index" : "not_analyzed" },
-            "estado" :
-                { "type" : "string", "index" : "not_analyzed" },
-            "data" :
-                { "type" : "date", "format" : "dd/MM/YYYY" }
-            } 
-        })
-        print 'Mapping done'
-        
-    except "HTTP Error 404":
-        print "Creating new database"
+    if (FIRST_TIME):
+        try:
+            client.delete()
+            print "Delete done"
+            
+            client.mapping_update(
+            { "properties" :
+                { "orador" : 
+                    { "type" : "string", "index" : "not_analyzed" },
+                 "partido" :
+                    { "type" : "string", "index" : "not_analyzed" },
+                "estado" :
+                    { "type" : "string", "index" : "not_analyzed" },
+                "data" :
+                    { "type" : "date", "format" : "dd/MM/YYYY" }
+                } 
+            })
+            print 'Mapping done'
+            
+        except "HTTP Error 404":
+            print "Creating new database"
 
     print "Inserting rows"
     client.upsert(funkystuff(reader))
     
-
+FIRST_TIME = False
 upload(client, "data/discursos.csv");
